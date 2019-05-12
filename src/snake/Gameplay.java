@@ -30,6 +30,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private int bonusPointCounter = 0;
     private boolean bonus = false;
 
+    private int howManyBonusPoints = 0;
     private ImageIcon titleImage;
 
     private ImageIcon leftmouth;
@@ -232,12 +233,19 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
 
             score += 20;
+            howManyBonusPoints ++;
 
+            if(howManyBonusPoints % 2 == 0){
+                lengthOfSnake += 2;
+
+            }
+            else
+                lengthOfSnake += 1;
 
 
 
             finalScore = score;
-            lengthOfSnake++;
+
             finalSnakeLength = lengthOfSnake;
             count = true;
             bonus = true;
@@ -254,6 +262,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             y2pos = random.nextInt(18);
 
         }
+
+        //Prints out bonus point for the user to see
         if(bonus == true){
 
             g.setColor(Color.white);
@@ -261,9 +271,12 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             g.setFont(new Font("Arial", Font.PLAIN, 14));
             g.drawString("Bonus Point!", 600, 430);
             bonusPointCounter++;
+            System.out.println("this is bonus" + bonusPointCounter);
+
 
             if(bonusPointCounter == 35){
                 bonus = false;
+                bonusPointCounter = 0;
             }
         }
 
@@ -294,6 +307,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 if(ballCounter == 50){
 
                     count = true;
+                    enemyImage2.paintIcon(this, g, -4, 0) ;
+                    ballCounter = 0;
 
                 }
 

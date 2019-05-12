@@ -27,6 +27,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
     private boolean count = true;
     private int  ballCounter = 0;
+    private int bonusPointCounter = 0;
+    private boolean bonus = false;
 
     private ImageIcon titleImage;
 
@@ -230,11 +232,15 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
 
             score += 20;
+
+
+
+
             finalScore = score;
             lengthOfSnake++;
             finalSnakeLength = lengthOfSnake;
             count = true;
-
+            bonus = true;
 
             if(finalScore > highScore) {
                 highScore = finalScore;
@@ -247,6 +253,18 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             x2pos = random.nextInt(26);
             y2pos = random.nextInt(18);
 
+        }
+        if(bonus == true){
+
+            g.setColor(Color.white);
+
+            g.setFont(new Font("Arial", Font.PLAIN, 14));
+            g.drawString("Bonus Point!", 600, 430);
+            bonusPointCounter++;
+
+            if(bonusPointCounter == 35){
+                bonus = false;
+            }
         }
 
         //This count the amount of time needed before the ball can be on the screen
